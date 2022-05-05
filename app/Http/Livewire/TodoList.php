@@ -17,11 +17,17 @@ class TodoList extends Component
         return view('livewire.todo-list', compact('todos'));
     }
 
+    protected $rules = [
+        'body' => 'required|string|max:255'
+        ];
+    protected $messages = [
+      'body.required' => 'Please fill in task. No empty task allowed.'
+    ];
+
     public function submitForm(){
         //validation
-        $this->validate([
-            'body' => 'required|string|max:255'
-        ]);
+        $this->validate();
+
 
 
         $user = Auth::user();           //ingelogde user ophalen
@@ -37,4 +43,6 @@ class TodoList extends Component
     public function deleteTodo(Todo $todo){
         $todo->delete();
     }
+
+
 }

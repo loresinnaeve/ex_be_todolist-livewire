@@ -7,8 +7,9 @@
             <form wire:submit.prevent="submitForm" action="{{action('App\Http\Controllers\TodoListController@store')}}" method="post" enctype="multipart/form-data" class="d-flex flex-row">
                 @csrf
                 <fieldset @unless(Auth::user()) disabled @endunless>
-                    <div class="form-group d-flex flex-column">
-                        <input wire:model.lazy="body"  type="text" name="body" class="form-control" placeholder="Add todo here ...." id="body">
+                    <div class="form-group d-flex flex-column ">
+                        @error('body') <span class="error text-danger">{{ $message }}</span>@enderror
+                        <input wire:model.lazy="body"  type="text" name="body" class="form-control " placeholder="Add todo here ...." id="body">
                         <button type="submit" class="btn btn-primary">Create todo</button>
                     </div>
 
